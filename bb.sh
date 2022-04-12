@@ -154,7 +154,7 @@ global_variables() {
     core_theme_header_max_width="860"
 
     # The locale to use for the dates displayed on screen
-    date_format="%B %d, %Y"
+    date_format="%B %d, %Y - %T"
     date_locale="C"
     date_inpost="bashblog_timestamp"
     # Don't change these dates
@@ -479,7 +479,29 @@ create_html_page() {
         fi
         echo "<a href='https://github.com/$global_github_username' target='$github_link_target' class='github-corner' aria-label='Visit my profile on GitHub'><svg width='80' height='80' viewBox='0 0 250 250' style='fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;' aria-hidden='true'><path d='M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z'></path><path d='M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2' fill='currentColor' style='transform-origin: 130px 106px;' class='octo-arm'></path><path d='M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z' fill='currentColor' class='octo-body'></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>";
         [[ -n $body_end_file ]] && cat "$body_end_file"
-        echo '</body></html>'
+        echo '</body></html>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script> '
     } > "$filename"
 }
 
@@ -970,7 +992,7 @@ create_includes() {
         protected_mail=${protected_mail//./&#46;}
         copyright_year=$(date +'%Y')
         echo "<div id=\"footer\">Copyright &copy; $copyright_year $global_author<br>$global_license<br><a href=\"$global_author_url\">$global_author</a> &mdash; <a href=\"mailto:$protected_mail\">$protected_mail</a><br>"
-        echo 'Generated with <a href="https://github.com/dvwallin/bashblog-ng">bashblog-ng</a> - (B)e (A)wesome & (S)imple (H)omie</div>'
+        echo 'Generated with <a href="https://github.com/dvwallin/bashblog-ng">bashblog-ng</a> - (B)e (A)wesome & (S)imple (H)omie | <a href="#top">&#47;&#92;</a></div>'
         } >> ".footer.html"
     fi
 }
@@ -1008,7 +1030,38 @@ create_css() {
         @media screen and (min-width:505px){.navigation-menu{height:70px;display:flex;align-items:center;border-bottom:1px solid #e7e7e7}
         .main-navigation{display:flex;flex-direction:row;justify-content:flex-end;margin-left:30px}.main-navigation a{padding:15px 17px}
         .hamburger-icon{display:none}#menu-toggle:checked+.main-navigation{display:flex}
-        .content p{margin-left:24px;margin-right:24px;}}' > blog.css
+        .content p{margin-left:24px;margin-right:24px;}}
+pre {
+	border:1px dashed #2F6FAB;
+	background-color:#F9F9F9;
+	margin:0 auto;
+	//width: 90%;
+	padding-top: 7px;
+	padding-bottom: 7px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 10px;
+	white-space: pre-wrap;
+}
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}' > blog.css
     fi
 
     # If there is a style.css from the parent page (i.e. some landing page)
