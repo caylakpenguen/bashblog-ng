@@ -1032,16 +1032,20 @@ create_css() {
         .hamburger-icon{display:none}#menu-toggle:checked+.main-navigation{display:flex}
         .content p{margin-left:24px;margin-right:24px;}}
 pre {
-	border:1px dashed #2F6FAB;
-	background-color:#F9F9F9;
-	margin:0 auto;
-	//width: 90%;
-	padding-top: 7px;
-	padding-bottom: 7px;
-	padding-left: 10px;
-	padding-right: 10px;
-	margin: 10px;
-	white-space: pre-wrap;
+    background: #f4f4f4;
+    border: 1px solid #ddd;
+    border-left: 3px solid #f36d33;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
 }
 #myBtn {
   display: none;
